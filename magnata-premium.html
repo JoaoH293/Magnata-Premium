@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnata Premium | Moda urbana com conforto real</title>
+  <meta name="description" content="Magnata Premium: moda urbana, tecido ultra-macio e atitude para quem nao abre mao de conforto nem estilo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #050505;
+      --ink: #111111;
+      --soft-black: #161616;
+      --yellow: #ffe100;
+      --gold: #c99a21;
+      --light-gold: #f7d85b;
+      --smoke: #f5f2e8;
+      --white: #ffffff;
+      --muted: #b9b5a5;
+      --line: rgba(255, 225, 0, 0.18);
+      --shadow: 0 22px 80px rgba(0, 0, 0, 0.35);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", system-ui, sans-serif;
+      color: var(--white);
+      background: var(--black);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    a,
+    button {
+      cursor: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 180ms ease, height 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--yellow);
+      box-shadow: 0 0 22px rgba(255, 225, 0, 0.9);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255, 225, 0, 0.72);
+      border-radius: 999px;
+    }
+
+    body.cursor-active .cursor-ring {
+      width: 54px;
+      height: 54px;
+      border-color: var(--gold);
+      background: rgba(255, 225, 0, 0.08);
+    }
+
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(255, 225, 0, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(201, 154, 33, 0.2), transparent 24%),
+        linear-gradient(135deg, #030303 0%, #15110a 52%, #050505 100%);
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.16;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, #000, transparent 82%);
+    }
+
+    .float-shape {
+      position: fixed;
+      width: 34vw;
+      min-width: 260px;
+      aspect-ratio: 1;
+      z-index: -1;
+      border-radius: 41% 59% 62% 38% / 47% 38% 62% 53%;
+      background: rgba(255, 225, 0, 0.06);
+      filter: blur(2px);
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+
+    .float-shape.one {
+      right: -11vw;
+      top: 22vh;
+    }
+
+    .float-shape.two {
+      left: -16vw;
+      bottom: 2vh;
+      animation-delay: -5s;
+      background: rgba(201, 154, 33, 0.08);
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) rotate(0deg); }
+      to { transform: translate3d(28px, -42px, 0) rotate(18deg); }
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px clamp(18px, 4vw, 58px);
+      background: rgba(5, 5, 5, 0.72);
+      border-bottom: 1px solid rgba(255, 225, 0, 0.12);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+      text-decoration: none;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      border: 1px solid rgba(255, 225, 0, 0.3);
+      background: #000;
+    }
+
+    .brand span {
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: rgba(255,255,255,.78);
+      text-decoration: none;
+      font-size: 0.89rem;
+      font-weight: 700;
+      padding: 10px 12px;
+      transition: color 180ms ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 6px;
+      height: 2px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 220ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--yellow);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--yellow);
+      border-radius: var(--radius);
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 5px auto;
+      background: currentColor;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    .menu-open .menu-btn span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-open .menu-btn span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-open .menu-btn span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    section {
+      position: relative;
+      padding: clamp(72px, 11vw, 132px) clamp(18px, 4vw, 58px);
+    }
+
+    .inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding-top: 132px;
+      padding-bottom: 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(280px, .94fr);
+      gap: clamp(28px, 5vw, 68px);
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--yellow);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: .78rem;
+      letter-spacing: .08em;
+    }
+
+    .tag::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--yellow);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-family: "Anton", Impact, sans-serif;
+      font-size: clamp(3.3rem, 9vw, 8.8rem);
+      line-height: .94;
+      text-transform: uppercase;
+      max-width: 860px;
+    }
+
+    .gold-word {
+      color: var(--yellow);
+      text-shadow: 0 0 34px rgba(255, 225, 0, .28);
+    }
+
+    .hero-copy {
+      max-width: 670px;
+      margin: 24px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: clamp(1rem, 1.8vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      --bg: var(--yellow);
+      --fg: var(--black);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 14px 34px rgba(255, 225, 0, .18);
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 46px rgba(255, 225, 0, .28);
+    }
+
+    .btn.secondary {
+      --bg: rgba(255,255,255,.04);
+      --fg: var(--white);
+      border-color: rgba(255,255,255,.16);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .hero-card {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      justify-self: end;
+      width: min(470px, 100%);
+    }
+
+    .logo-stage {
+      position: relative;
+      min-height: 440px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(255, 225, 0, .22);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255, 225, 0, .12), transparent 36%),
+        #020202;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .logo-stage::before {
+      content: "";
+      position: absolute;
+      inset: 11%;
+      border: 1px solid rgba(255, 225, 0, .2);
+      transform: rotate(-4deg);
+    }
+
+    .logo-stage::after {
+      content: "ULTRA SOFT";
+      position: absolute;
+      right: -34px;
+      bottom: 34px;
+      color: rgba(255, 225, 0, .2);
+      font-family: "Anton", sans-serif;
+      font-size: 4.4rem;
+      line-height: 1;
+      transform: rotate(-90deg);
+    }
+
+    .logo-stage img {
+      width: min(72%, 330px);
+      filter: drop-shadow(0 22px 60px rgba(255, 225, 0, .14));
+      animation: softPulse 3.8s ease-in-out infinite alternate;
+      z-index: 2;
+    }
+
+    @keyframes softPulse {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(-10px) scale(1.025); }
+    }
+
+    .hero-note {
+      width: 88%;
+      margin-top: -54px;
+      padding: 18px;
+      justify-self: start;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      background: rgba(17,17,17,.86);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      z-index: 3;
+    }
+
+    .hero-note strong {
+      display: block;
+      color: var(--yellow);
+      margin-bottom: 7px;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .76fr) minmax(280px, .44fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      font-family: "Anton", sans-serif;
+      font-size: clamp(2.4rem, 5.5vw, 5.6rem);
+      line-height: .95;
+      text-transform: uppercase;
+    }
+
+    .section-head p,
+    .lead {
+      color: rgba(255,255,255,.72);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .comfort {
+      background: linear-gradient(180deg, rgba(255, 225, 0, .04), rgba(0,0,0,0));
+    }
+
+    .comfort-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .feature-panel,
+    .card,
+    .location-panel,
+    .contact-panel {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+      box-shadow: 0 18px 54px rgba(0,0,0,.22);
+    }
+
+    .feature-panel {
+      min-height: 360px;
+      padding: clamp(24px, 4vw, 44px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .feature-panel h3 {
+      max-width: 720px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .fabric-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .fabric-line span {
+      padding: 10px 13px;
+      border: 1px solid rgba(255, 225, 0, .25);
+      border-radius: 999px;
+      color: var(--yellow);
+      background: rgba(255, 225, 0, .05);
+      font-weight: 800;
+      font-size: .88rem;
+    }
+
+    .texture-card {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      padding: 26px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .texture-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        repeating-linear-gradient(110deg, rgba(255,255,255,.05) 0 2px, transparent 2px 10px),
+        radial-gradient(circle, rgba(255,225,0,.32), transparent 42%);
+      animation: weave 9s linear infinite;
+    }
+
+    @keyframes weave {
+      to { transform: translate3d(36px, 18px, 0) rotate(6deg); }
+    }
+
+    .texture-card p {
+      position: relative;
+      margin: 0;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 18px;
+      border-radius: var(--radius);
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .products-wrap {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .empty-products {
+      min-height: 330px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 34px;
+      border: 1px dashed rgba(255, 225, 0, .4);
+      border-radius: var(--radius);
+      background: rgba(255, 225, 0, .04);
+    }
+
+    .empty-products h3 {
+      color: var(--yellow);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.45rem, 3vw, 2.7rem);
+    }
+
+    .empty-products p {
+      max-width: 520px;
+      margin: 14px auto 0;
+      color: rgba(255,255,255,.7);
+      line-height: 1.7;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .preview-tile {
+      min-height: 156px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.1);
+      background:
+        linear-gradient(135deg, rgba(255, 225, 0, .16), transparent 42%),
+        rgba(255,255,255,.04);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 200ms ease, border-color 200ms ease;
+    }
+
+    .preview-tile:hover {
+      transform: translateY(-5px) rotate(-1deg);
+      border-color: rgba(255, 225, 0, .45);
+    }
+
+    .preview-tile b {
+      color: var(--yellow);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.12rem;
+    }
+
+    .preview-tile span {
+      color: rgba(255,255,255,.64);
+      font-size: .9rem;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 24px;
+      transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 225, 0, .5);
+      background: linear-gradient(145deg, rgba(255,225,0,.12), rgba(255,255,255,.03));
+    }
+
+    .card .kicker {
+      color: var(--yellow);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .card h3 {
+      margin-top: 18px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.5rem;
+    }
+
+    .price {
+      margin: 18px 0;
+      color: var(--yellow);
+      font-family: "Anton", sans-serif;
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .card ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      color: rgba(255,255,255,.73);
+    }
+
+    .card li::before {
+      content: "+";
+      color: var(--yellow);
+      margin-right: 8px;
+      font-weight: 900;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(300px, 1.05fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .about-copy {
+      color: rgba(255,255,255,.75);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .values {
+      display: grid;
+      gap: 14px;
+    }
+
+    .value {
+      padding: 20px;
+      border-left: 3px solid var(--yellow);
+      background: rgba(255,255,255,.045);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .value strong {
+      color: var(--yellow);
+      display: block;
+      margin-bottom: 6px;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 18px;
+    }
+
+    .location-panel {
+      padding: 28px;
+    }
+
+    .address {
+      margin: 18px 0 0;
+      color: rgba(255,255,255,.78);
+      line-height: 1.7;
+    }
+
+    .map {
+      min-height: 360px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      filter: grayscale(1) contrast(1.05);
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: 0;
+    }
+
+    .contact {
+      padding-bottom: 90px;
+    }
+
+    .contact-panel {
+      padding: clamp(24px, 5vw, 46px);
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 24px;
+      align-items: center;
+      background:
+        linear-gradient(120deg, rgba(255,225,0,.15), transparent 40%),
+        rgba(255,255,255,.045);
+    }
+
+    .socials {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 70px;
+      padding: 16px;
+      color: var(--white);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.25);
+      transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-4px);
+      color: var(--yellow);
+      border-color: rgba(255, 225, 0, .52);
+    }
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    footer {
+      padding: 26px clamp(18px, 4vw, 58px);
+      border-top: 1px solid rgba(255, 225, 0, .12);
+      color: rgba(255,255,255,.58);
+      text-align: center;
+      font-size: .9rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 680ms ease, transform 680ms ease;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      body {
+        cursor: auto;
+      }
+
+      a,
+      button {
+        cursor: pointer;
+      }
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 77px;
+        left: 14px;
+        right: 14px;
+        display: grid;
+        padding: 12px;
+        border: 1px solid rgba(255, 225, 0, .2);
+        border-radius: var(--radius);
+        background: rgba(5,5,5,.95);
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 200ms ease, transform 200ms ease;
+      }
+
+      .menu-open .nav-links {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .hero-grid,
+      .comfort-grid,
+      .products-wrap,
+      .about-grid,
+      .location-grid,
+      .contact-panel,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        justify-self: stretch;
+      }
+
+      .logo-stage {
+        min-height: 340px;
+      }
+
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .brand span {
+        display: none;
+      }
+
+      section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      h1 {
+        font-size: clamp(2.82rem, 15.5vw, 4.15rem);
+        line-height: .96;
+      }
+
+      .hero {
+        padding-top: 92px;
+      }
+
+      .hero-actions,
+      .socials,
+      .product-grid {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-note {
+        width: 94%;
+      }
+
+      .logo-stage::after {
+        font-size: 3rem;
+        right: -26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="page-bg" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="float-shape one" aria-hidden="true"></div>
+  <div class="float-shape two" aria-hidden="true"></div>
+
+  <header class="nav" id="top">
+    <a class="brand magnetic" href="#home" aria-label="Magnata Premium">
+      <img src="img-magnata.png" alt="Logo Magnata Premium">
+      <span>MAGNATA<br>PREMIUM</span>
+    </a>
+    <button class="menu-btn magnetic" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" aria-label="Menu principal">
+      <a href="#home">Home</a>
+      <a href="#products">Produtos</a>
+      <a href="#plans">Planos</a>
+      <a href="#about">Sobre</a>
+      <a href="#location">Localizacao</a>
+      <a href="#contact">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="inner hero-grid">
+        <div class="hero-text reveal">
+          <span class="tag">Moda urbana premium</span>
+          <h1>Estilo de rua. <span class="gold-word">Toque de luxo.</span></h1>
+          <p class="hero-copy">Magnata Premium veste quem chega junto: roupa com presenca, caimento moderno e um tecido ultra-macio que muda o jeito de usar moda urbana.</p>
+          <div class="hero-actions">
+            <a class="btn magnetic" href="#products">Sentir o drop antes de todo mundo</a>
+            <a class="btn secondary magnetic" href="#contact">Chamar no WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-card reveal">
+          <div class="logo-stage">
+            <img src="img-magnata.png" alt="Coroa e logotipo Magnata Premium">
+          </div>
+          <div class="hero-note">
+            <strong>Voce nao precisa sacrificar estilo para estar confortavel.</strong>
+            Tecido ultra-soft, visual firme e aquela sensacao de peca favorita desde o primeiro uso.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="comfort" id="comfort">
+      <div class="inner">
+        <div class="section-head reveal">
+          <h2>Conforto que nao fica quieto.</h2>
+          <p>O diferencial da Magnata Premium nao e so visual. E o toque: leve, macio, gostoso de usar no corre do dia, no rolê e na viagem para outra cidade.</p>
+        </div>
+        <div class="comfort-grid">
+          <article class="feature-panel reveal">
+            <div>
+              <span class="tag">Ultra-soft fabric</span>
+              <h3>Uma peca com atitude por fora e descanso por dentro.</h3>
+            </div>
+            <div class="fabric-line">
+              <span>Toque macio</span>
+              <span>Caimento urbano</span>
+              <span>Uso o dia inteiro</span>
+              <span>Pronto para viajar</span>
+            </div>
+          </article>
+          <article class="feature-panel texture-card reveal">
+            <p>A roupa acompanha o movimento. Nada duro, nada sem personalidade.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="inner">
+        <div class="section-head reveal">
+          <h2>Produtos</h2>
+          <p>O espaco dos drops esta pronto. As primeiras pecas serao cadastradas em breve pelo administrador da loja.</p>
+        </div>
+        <div class="products-wrap">
+          <div class="empty-products reveal">
+            <div>
+              <h3>Produtos chegando em breve.</h3>
+              <p>Enquanto o catalogo oficial esta sendo preparado, ja da para falar com a loja e garantir atendimento para compras locais ou entre cidades.</p>
+            </div>
+          </div>
+          <div class="product-grid">
+            <div class="preview-tile reveal"><b>Camisetas premium</b><span>Base macia para todo dia.</span></div>
+            <div class="preview-tile reveal"><b>Conjuntos urbanos</b><span>Visual fechado sem perder conforto.</span></div>
+            <div class="preview-tile reveal"><b>Acessorios</b><span>Detalhes para completar o corre.</span></div>
+            <div class="preview-tile reveal"><b>Drops limitados</b><span>Pecas especiais para quem acompanha.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans">
+      <div class="inner">
+        <div class="section-head reveal">
+          <h2>Planos de desconto</h2>
+          <p>Beneficios pensados para cliente fiel, grupos de amigos, revendedores e compras para outras cidades.</p>
+        </div>
+        <div class="plans-grid">
+          <article class="card reveal">
+            <span class="kicker">Cliente fiel</span>
+            <h3>Clube Magnata</h3>
+            <div class="price">5%</div>
+            <ul>
+              <li>Desconto em compras recorrentes</li>
+              <li>Aviso antecipado de novos drops</li>
+              <li>Atendimento direto pelo WhatsApp</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <span class="kicker">Mais pedido</span>
+            <h3>Combo do Rolê</h3>
+            <div class="price">10%</div>
+            <ul>
+              <li>Beneficio para compras em grupo</li>
+              <li>Ideal para presentear ou fechar looks</li>
+              <li>Separacao personalizada por tamanho</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <span class="kicker">Atacado</span>
+            <h3>Magnata Parceiro</h3>
+            <div class="price">Sob consulta</div>
+            <ul>
+              <li>Condicoes para volume maior</li>
+              <li>Suporte para vendas intermunicipais</li>
+              <li>Negociacao rapida e transparente</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="inner about-grid">
+        <div class="reveal">
+          <span class="tag">Sobre nos</span>
+          <h2>Uma loja pequena no mapa, grande no estilo.</h2>
+        </div>
+        <div class="about-copy reveal">
+          <p>A Magnata Premium nasceu para trazer uma opcao diferente para a regiao: moda urbana com acabamento bonito, pegada jovem e uma sensacao de uso que faz a peca sair do armario toda semana.</p>
+          <p>A marca acredita em roupa com presenca, atendimento de verdade e venda sem fronteira de cidade. Se a peca combina com voce, a distancia nao deve atrapalhar.</p>
+          <div class="values">
+            <div class="value"><strong>Exclusividade sem frescura</strong>Produtos escolhidos com personalidade, sem cara de prateleira comum.</div>
+            <div class="value"><strong>Conforto como regra</strong>O tecido ultra-macio e prioridade, nao detalhe escondido.</div>
+            <div class="value"><strong>Atendimento proximo</strong>Conversa direta para tamanho, envio, reserva e condicoes especiais.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="location">
+      <div class="inner">
+        <div class="section-head reveal">
+          <h2>Localizacao</h2>
+          <p>Visite a loja fisica ou chame no contato para combinar compra e envio para outras cidades.</p>
+        </div>
+        <div class="location-grid">
+          <div class="location-panel reveal">
+            <span class="tag">Loja fisica</span>
+            <h3>Magnata Premium</h3>
+            <p class="address">Endereco da loja: atualize aqui com rua, numero, bairro e cidade.<br>Atendimento para compras locais e intermunicipais.</p>
+            <div class="hero-actions">
+              <a class="btn magnetic" href="#contact">Falar com a loja</a>
+            </div>
+          </div>
+          <div class="map reveal" aria-label="Mapa da localizacao da loja">
+            <iframe title="Mapa Magnata Premium" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Magnata%20Premium&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="inner contact-panel reveal">
+        <div>
+          <span class="tag">Contato</span>
+          <h2>Chega no direct.</h2>
+          <p class="lead">Duvida sobre tamanho, tecido, envio ou desconto? Fale com a Magnata Premium pelo canal que for mais facil.</p>
+        </div>
+        <div class="socials">
+          <a class="social-link magnetic" href="https://wa.me/5513997913904" target="_blank" rel="noopener"><span class="icon">W</span><span>WhatsApp<br><small>Atendimento direto</small></span></a>
+          <a class="social-link magnetic" href="https://instagram.com/lojamasculinamagnata" target="_blank" rel="noopener"><span class="icon">IG</span><span>Instagram<br><small>Drops e bastidores</small></span></a>
+          <a class="social-link magnetic" href="https://www.facebook.com/p/Magnata-Premium-100076988351882/" target="_blank" rel="noopener"><span class="icon">f</span><span>Facebook<br><small>Novidades da loja</small></span></a>
+          <a class="social-link magnetic" href="mailto:magnatapremium2021@gmail.com"><span class="icon">@</span><span>E-mail<br><small>Parcerias e atacado</small></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Magnata Premium - Moda urbana premium com tecido ultra-macio.
+  </footer>
+
+  <script>
+    const body = document.body;
+    const dot = document.querySelector(".cursor-dot");
+    const ring = document.querySelector(".cursor-ring");
+    let mouseX = innerWidth / 2;
+    let mouseY = innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener("mousemove", (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.querySelectorAll("a, button, .card, .preview-tile").forEach((element) => {
+      element.addEventListener("mouseenter", () => body.classList.add("cursor-active"));
+      element.addEventListener("mouseleave", () => body.classList.remove("cursor-active"));
+    });
+
+    document.querySelectorAll(".magnetic").forEach((element) => {
+      element.addEventListener("mousemove", (event) => {
+        const box = element.getBoundingClientRect();
+        const x = (event.clientX - box.left - box.width / 2) * 0.18;
+        const y = (event.clientY - box.top - box.height / 2) * 0.18;
+        element.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      element.addEventListener("mouseleave", () => {
+        element.style.transform = "translate(0, 0)";
+      });
+    });
+
+    const menuBtn = document.querySelector(".menu-btn");
+    const links = document.querySelectorAll(".nav-links a");
+    menuBtn.addEventListener("click", () => {
+      const open = body.classList.toggle("menu-open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+    });
+    links.forEach((link) => link.addEventListener("click", () => {
+      body.classList.remove("menu-open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+    const sections = [...document.querySelectorAll("main section[id]")];
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: "-45% 0px -48% 0px" });
+
+    sections.forEach((section) => navObserver.observe(section));
+  </script>
+</body>
+</html>
